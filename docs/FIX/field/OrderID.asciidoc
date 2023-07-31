@@ -1,0 +1,7 @@
+|37
+|https://www.onixs.biz/fix-dictionary/4.4/tagNum_37.html[OrderID]
+|Y
+|The PowerTrade-assigned order ID.
+|https://docs.api.power.trade/#order_id[order_id]
+
+`"NONE"` = Unknown OrderID (if `ExecType` = `"8"` Rejected)

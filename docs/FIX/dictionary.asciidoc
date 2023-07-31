@@ -1,0 +1,8 @@
+== *FIX Dictionary*
+
+PowerTrade uses FIX 4.4 with the 20030618 errata.
+No custom tags are used.
+
+=== *Downloads*
+
+https://raw.githubusercontent.com/quickfix/quickfix/master/spec/FIX44.xml

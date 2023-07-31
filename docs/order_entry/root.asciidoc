@@ -1,0 +1,41 @@
+[[FIX_Order_Entry]]
+= *PowerTrade `Order Entry FIX API` Specification*
+:toc: left
+:toclevels: 4
+:stylesheet: ../css/powertrade.css
+:source-highlighter: highlightjs
+:nofooter:
+:sectnums:
+
+:fix: oe
+:VERSION: VERSION 1.0
+{VERSION} (see <<Order_Entry_FIX_API_Revision_History,Revision History>>)
+
+include::introduction.asciidoc[]
+
+include::../FIX/dictionary.asciidoc[]
+include::../FIX/connecting.asciidoc[]
+include::../FIX/identifiers.asciidoc[]
+include::../FIX/session_level_messages.asciidoc[]
+include::exchange_bound_messages.asciidoc[]
+include::client_bound_messages.asciidoc[]
+include::examples.asciidoc[]
+
+
+== *Revision History*
+
+[[Order_Entry_FIX_API_Revision_History]]
+.revision history:
+[width="95%",cols=".^20%, .^10%, .^70%", options="header"]
+|=================================
+| Date | Version | Notes
+
+|2023/08/01
+|1.0
+|Public release
+
+|2023/07/30
+|0.1
+|Initial Order Entry FIX API documentation
+
+|=================================

@@ -1,0 +1,51 @@
+== *Session-Level Messages*
+
+=== *Establishing a connection*
+
+1. Client sends server → <<FIX_Logon, Logon <A> >> message
+2. Is client http://www.onixs.biz/fix-dictionary/4.4/tagNum_141.html[ResetSeqNumFlag <141>] to `Y`?
+
+** Yes, reset sequence numbers and proceed
+*** server resets next expected client sequence number
+*** server resets its own sequence number
+*** server responds with ← <<FIX_Logon, Logon <A> >> message with reset sequence number
+*** client sends server → <<FIX_Heartbeat, Heartbeat <0> >>
+
+** No, disconnect
+3. Success! Your FIX connection is established.
+
+=== *When can sequence numbers be reset?*
+
+PowerTrade runs the server side of the FIX connection (_"acceptor"_). PowerTrade never resets sequence numbers on the server side during the logon workflow unless the client explicitly requests it.
+
+The client (_"initiator"_) can reset sequence numbers during <<FIX_Logon, Logon <A> >> by setting http://www.onixs.biz/fix-dictionary/4.4/tagNum_141.html[ResetSeqNumFlag <141>] to `Y`.
+
+PowerTrade recommends that client consider configuring the FIX initiator to automatically reset sequence numbers under the following conditions:
+
+* logon
+* logout
+* disconnect
+* error
+
+While synchronizing sequence numbers after a replay, the client may send a <<FIX_Sequence_Reset, Sequence Reset <4> >> with http://www.onixs.biz/fix-dictionary/4.4/tagNum_123.html[GapFillFlag <123>] = `Y` in lieu of a replay.
+
+=== *Ending a connection*
+
+====
+If the session was initiated using an API Key with enabled ✅`Cancel on Disconnect`, then when the client disconnects from the FIX Order Entry, for whatever reason, the exchange will cancel all the orders associated with that FIX session.
+====
+
+The client may send the server an optional http://www.onixs.biz/fix-dictionary/4.4/msgType_5_5.html[Logout <5>] message but the exchange will not interpret its absence as being an abnormal condition.
+
+Under certain conditions, the server may send the client a http://www.onixs.biz/fix-dictionary/4.4/msgType_5_5.html[Logout <5>] message where the http://www.onixs.biz/fix-dictionary/4.4/tagNum_58.html[Text <58>] field contains the reason, such as scheduled maintenance.
+
+include::message/StandardHeader.asciidoc[]
+include::message/StandardTrailer.asciidoc[]
+include::message/Logon.asciidoc[]
+include::message/Heartbeat.asciidoc[]
+include::message/TestRequest.asciidoc[]
+include::message/ResendRequest.asciidoc[]
+include::message/Reject.asciidoc[]
+include::message/SequenceReset.asciidoc[]
+include::message/Logout.asciidoc[]
+include::message/BusinessMessageReject.asciidoc[]

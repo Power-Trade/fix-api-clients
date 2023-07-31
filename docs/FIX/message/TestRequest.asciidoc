@@ -1,0 +1,15 @@
+=== *Test Request <1>*
+
+http://www.onixs.biz/fix-dictionary/4.4/msgType_1_1.html[FIX4.4 Standard]
+
+:msgtype: 1
+.`Resend Request` fields:
+include::_table_begin_1.asciidoc[]
+|===================================================
+| Tag | Name | Required | Description | Valid Values
+
+include::../field/Header.asciidoc[]
+include::../field/TestReqID.asciidoc[]
+include::../field/Trailer.asciidoc[]
+
+|===================================================

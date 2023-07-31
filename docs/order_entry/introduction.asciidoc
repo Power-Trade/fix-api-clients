@@ -1,0 +1,11 @@
+== *Introduction*
+
+Institutions can use the FIX Order Entry session to submit and cancel orders.
+
+====
+Please note that for `FIX Order Entry` sessions API key with *"Trade"* permission `is required` as a password in <<FIX_Logon,Logon <A> >>.
+
+API keys can be generated in https://app.power.trade/api-keys[PowerTrade Web App].
+====
+
+// include::../FIX/survey.asciidoc[]

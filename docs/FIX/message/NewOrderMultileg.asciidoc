@@ -1,0 +1,27 @@
+=== *New Order Multileg <AB>*
+
+https://www.onixs.biz/fix-dictionary/4.4/msgType_AB_6566.html[FIX4.4 Standard]
+
+:msgtype: AB
+.`New Order Multileg` fields:
+include::_table_begin_1.asciidoc[]
+|===================================================
+| Tag | Name | Required | Description | Valid Values
+
+include::../field/Header.asciidoc[]
+include::../field/ClOrdID.asciidoc[]
+include::../field/ExecInst.asciidoc[]
+include::../field/OrdType.asciidoc[]
+include::../field/Price.asciidoc[]
+include::../field/OrderQty.asciidoc[]
+include::../field/MinQty.asciidoc[]
+include::../field/Side.asciidoc[]
+include::../field/Symbol.asciidoc[]
+include::../field/SymbolSfx.asciidoc[]
+include::../field/InstrumentLeg.asciidoc[]
+include::../field/TimeInForce.asciidoc[]
+include::../field/TransactTime.asciidoc[]
+include::../field/ExpireTime.asciidoc[]
+include::../field/Trailer.asciidoc[]
+
+|===================================================

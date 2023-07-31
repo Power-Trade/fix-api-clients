@@ -1,0 +1,19 @@
+=== *Business Message Reject <j>*
+
+http://www.onixs.biz/fix-dictionary/4.4/msgType_j_106.html[FIX4.4 Standard]
+
+:msgtype: j
+.`Business Message Reject` fields:
+include::_table_begin_1.asciidoc[]
+|===================================================
+| Tag | Name | Required | Description | Valid Values
+
+include::../field/Header.asciidoc[]
+include::../field/RefSeqNum.asciidoc[]
+include::../field/Text.asciidoc[]
+include::../field/RefMsgType.asciidoc[]
+include::../field/BusinessRejectRefID.asciidoc[]
+include::../field/BusinessRejectReason.asciidoc[]
+include::../field/Trailer.asciidoc[]
+
+|===================================================

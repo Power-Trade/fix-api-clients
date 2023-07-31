@@ -1,0 +1,10 @@
+|11
+|https://www.onixs.biz/fix-dictionary/4.4/tagNum_11.html[ClOrdID]
+|Y
+|Unique ID of the new Order, Cancel, or Cancel/Replace request as assigned by the firm.
+
+It is critical that this ID is unique and monotonically increased and be in range 0..72'057'594'037'927'936 (2^56)
+
+Good practice: start with Unix time in µs and increment for each request. 
+
+|https://docs.api.power.trade/#order_token[order_token]

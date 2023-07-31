@@ -1,0 +1,7 @@
+|16
+|https://www.onixs.biz/fix-dictionary/4.4/tagNum_16.html[EndSeqNo]
+|Y
+|Message sequence number of last message in range to be resent.
+
+If request is for a single message `BeginSeqNo <7> = EndSeqNo <16>`. If request is for all messages subsequent to a particular message, `EndSeqNo <16> = 0` (representing infinity).
+|

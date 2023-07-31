@@ -1,0 +1,19 @@
+=== *Reject <3>*
+
+http://www.onixs.biz/fix-dictionary/4.4/msgType_3_3.html[FIX4.4 Standard]
+
+:msgtype: 3
+.`Reject` fields:
+include::_table_begin_1.asciidoc[]
+|===================================================
+| Tag | Name | Required | Description | Valid Values
+
+include::../field/Header.asciidoc[]
+include::../field/RefSeqNum.asciidoc[]
+include::../field/Text.asciidoc[]
+include::../field/RefTagID.asciidoc[]
+include::../field/RefMsgType.asciidoc[]
+include::../field/SessionRejectReason.asciidoc[]
+include::../field/Trailer.asciidoc[]
+
+|===================================================

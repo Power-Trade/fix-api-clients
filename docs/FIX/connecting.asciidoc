@@ -1,0 +1,32 @@
+[[FIX_API_Connecting]]
+== *Connecting*
+
+Steps to get connected to our FIX infrastructure:
+
+=== *Get connected*
+
+There are 4 options for production FIX connectivity to PowerTrade:
+
+1. Over Internet with TLS encryption using server-side certificate;
+2. Over Internet with mutual TLS: using signed certificates on client and server sides.
+
+* TEST: 
+
+** *DropCopy*: `api.wss.test.power.trade:2020`
+** *OrderEntry*: `api.wss.test.power.trade:2021`
+
+* PROD:
+
+** *DropCopy*: `api.wss.prod.power.trade:2020`
+** *OrderEntry*: `api.wss.prod.power.trade:2021`
+
+=== *SETUP A TEST ACCOUNT*
+
+Create a Test account by going to: 
+
+https://powertrade-web-test.web.app/
+
+
+=== *GENERATE API KEYS*
+
+Generate API Keys at: https://powertrade-web-test.web.app/api-keys

@@ -1,0 +1,5 @@
+== *Exchange-Bound Messages*
+
+include::../FIX/message/NewOrderSingle.asciidoc[]
+include::../FIX/message/NewOrderMultileg.asciidoc[]
+include::../FIX/message/OrderCancelRequest.asciidoc[]

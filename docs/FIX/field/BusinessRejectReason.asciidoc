@@ -1,0 +1,16 @@
+|380
+|https://www.onixs.biz/fix-dictionary/4.4/tagNum_380.html[BusinessRejectReason]
+|Y
+|Code to identify the reason for the http://www.onixs.biz/fix-dictionary/4.4/msgType_j_106.html[Business Message Reject <j>] message
+|
+`"0"` = Other
+
+`"1"` = Unknown ID
+
+`"2"` = Unknown Security
+
+`"3"` = Unsupported Message Type
+
+`"4"` = Application not available
+
+`"5"` = Conditionally Required Field Missing

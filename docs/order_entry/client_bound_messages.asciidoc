@@ -1,0 +1,4 @@
+== *Client-Bound Messages*
+
+include::../FIX/message/ExecutionReport.asciidoc[]
+include::../FIX/message/OrderCancelReject.asciidoc[]

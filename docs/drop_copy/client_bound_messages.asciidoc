@@ -1,0 +1,3 @@
+== *Client-Bound Messages*
+
+include::../FIX/message/ExecutionReport.asciidoc[]

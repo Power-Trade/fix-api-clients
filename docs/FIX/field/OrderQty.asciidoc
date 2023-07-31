@@ -1,0 +1,5 @@
+|38
+|https://www.onixs.biz/fix-dictionary/4.4/tagNum_38.html[OrderQty]
+|Y
+|Order Quantity
+|Decimal

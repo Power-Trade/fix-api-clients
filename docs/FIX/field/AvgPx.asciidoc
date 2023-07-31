@@ -1,0 +1,7 @@
+|6
+|https://www.onixs.biz/fix-dictionary/4.4/tagNum_6.html[AvgPx]
+|Y
+|Calculated average price of all fills on this order.
+
+PowerTrade doesn't update this field, so it is always set to `0`.
+|`"0"`

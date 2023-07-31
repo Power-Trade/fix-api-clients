@@ -1,0 +1,7 @@
+=== *NewOrderSingle: Market*
+ifeval::["{fix}" == "oe"]
+include::NewOrderSingle_Market.asciidoc[]
+endif::[]
+include::ExecutionReport_MarketPending.asciidoc[]
+include::ExecutionReport_MarketNew.asciidoc[]
+include::ExecutionReport_MarketTrade.asciidoc[]

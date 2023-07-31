@@ -62,6 +62,8 @@ func RunCancelAll(cfgFilenameOE string, cfgFilenameDC string, apiKeyName string)
 	targetCompID, _ := appOE.Settings.GlobalSettings().Setting(config.TargetCompID)
 	StartConnection(appOE, appOE.Settings)
 
+	time.Sleep(100 * time.Millisecond)
+
 	appDC, err := NewTradeClient(cfgFilenameDC, apiKeyName)
 	if err != nil {
 		return err

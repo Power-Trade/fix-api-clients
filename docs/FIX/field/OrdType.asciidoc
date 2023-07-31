@@ -1,0 +1,8 @@
+|40
+|https://www.onixs.biz/fix-dictionary/4.4/tagNum_40.html[OrdType]
+|Y
+|Indicates order type
+|
+`"1"` = Market
+
+`"2"` = Limit

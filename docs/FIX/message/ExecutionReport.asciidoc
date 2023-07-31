@@ -1,0 +1,44 @@
+[[FIX_Execution_Report]]
+=== *Execution Report <8>*
+
+PowerTrade uses the https://www.onixs.biz/fix-dictionary/4.4/msgType_8_8.html[Execution Report <8>] message to:
+
+* confirm the receipt of an order
+// * confirm a stop order has triggered
+* confirm the successful cancellation of an order
+* relay fill information on orders
+* reject orders
+
+Each execution report contains two fields which are used to communicate both the current state of the order
+as understood by the exchange OrdStatus <39> and the purpose of the message ExecType <150>.
+
+:msgtype: 8
+.`Execution Report` fields:
+include::_table_begin_1.asciidoc[]
+|===================================================
+| Tag | Name | Required | Description | Valid Values
+
+include::../field/Header.asciidoc[]
+include::../field/Account.asciidoc[]
+include::../field/Symbol.asciidoc[]
+include::../field/ExecID.asciidoc[]
+include::../field/OrderID.asciidoc[]
+include::../field/ClOrdID.asciidoc[]
+include::../field/SecondaryOrderID.asciidoc[]
+include::../field/SecondaryClOrdID.asciidoc[]
+include::../field/ExecType.asciidoc[]
+include::../field/OrdStatus.asciidoc[]
+include::../field/TimeInForce.asciidoc[]
+include::../field/ExpireTime.asciidoc[]
+include::../field/OrdType.asciidoc[]
+include::../field/Side.asciidoc[]
+include::../field/Price.asciidoc[]
+include::../field/OrderQty.asciidoc[]
+include::../field/LeavesQty.asciidoc[]
+include::../field/LastPx.asciidoc[]
+include::../field/LastQty.asciidoc[]
+include::../field/AvgPx.asciidoc[]
+include::../field/InstrumentLeg.asciidoc[]
+include::../field/Trailer.asciidoc[]
+
+|===================================================

@@ -1,0 +1,5 @@
+|371
+|https://www.onixs.biz/fix-dictionary/4.4/tagNum_371.html[RefTagID]
+|Y
+|The tag number of the FIX field being referenced.
+|

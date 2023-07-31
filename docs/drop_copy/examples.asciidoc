@@ -1,0 +1,8 @@
+== *Examples*
+
+include::../FIX/example/logon_DC.asciidoc[]
+include::../FIX/example/order_single_limit.asciidoc[]
+include::../FIX/example/order_single_market.asciidoc[]
+include::../FIX/example/order_multileg.asciidoc[]
+include::../FIX/example/cancel_clordid.asciidoc[]
+include::../FIX/example/cancel_orderid.asciidoc[]

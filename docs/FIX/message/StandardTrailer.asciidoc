@@ -1,0 +1,12 @@
+[[FIX_Standard_Trailer]]
+=== *Standard Trailer*
+
+The http://www.onixs.biz/fix-dictionary/4.4/compBlock_StandardTrailer.html[*Standard Trailer*] is required on every message.
+.`Standard Trailer` fields:
+include::_table_begin_1.asciidoc[]
+|===================================================
+| Tag | Name | Required | Description | Valid Values
+
+include::../field/_Trailer.asciidoc[]
+
+|===================================================

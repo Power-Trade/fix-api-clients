@@ -1,0 +1,6 @@
+|108
+|https://www.onixs.biz/fix-dictionary/4.4/tagNum_108.html[HeartBtInt]
+|Y
+|Heartbeat interval in seconds.
+|
+`"30"` = 30 seconds

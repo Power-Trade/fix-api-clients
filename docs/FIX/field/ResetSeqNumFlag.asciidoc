@@ -1,0 +1,6 @@
+|141
+|https://www.onixs.biz/fix-dictionary/4.4/tagNum_141.html[ResetSeqNumFlag]
+|Y
+|Indicates both sides of a FIX session should reset sequence numbers. Required in PowerTrade.
+|
+`"Y"` = Yes, reset sequence numbers

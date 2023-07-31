@@ -1,0 +1,21 @@
+|17
+|https://www.onixs.biz/fix-dictionary/4.4/tagNum_17.html[ExecID]
+|Y
+|Unique event ID assigned by PowerTrade.
+|
+//Encoding depends on `OrdStatus`:
+
+//`ExecType` = `0` => `O` + order_id
+//`ExecType` = `D` => `O` + order_id
+//`ExecType` = `?` => `1` + order_id // For event=`order_updated`, it is not mapped uniquely to ExecType
+//`ExecType` = `F` => `2` + trade_id
+//`ExecType` = `8` => `8` + order_token
+//`ExecType` = `4` => `9` + order_id
+
+// confirm the receipt of an order:
+// confirm a stop order has triggered
+// confirm the successful cancellation of an order:
+// relay fill information on orders:
+// reject orders:
+
+//|https://docs.api.power.trade/#order_id[order_id]
