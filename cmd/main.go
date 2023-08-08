@@ -1,6 +1,8 @@
 // go run cmd/*.go -f spec/TEST-DropCopy.cfg -a test-example-key -m drop_copy
 // go run cmd/*.go -f spec/TEST-OrderEntry.cfg -a test-example-key -m order_entry
 // go run cmd/*.go -f spec/TEST-OrderEntry.cfg -g spec/TEST-DropCopy.cfg -a test-example-key -m cancel_all
+// go run cmd/*.go -f spec/TEST-OrderEntry.cfg -a test-example-key -m security_list -c securityListRequest
+// go run cmd/*.go -f spec/TEST-OrderEntry.cfg -a test-example-key -m security_list -c securityDefinitionRequest
 // Please create `<account_id>.api` with api_key and `<account_id>.pem` with private key
 
 // If you don't want to generate Password on each Logon, you may generate a JWT expiring in the far future
@@ -32,6 +34,8 @@ func main() {
 		err = fix.RunDropCopy(*fixConfigPath, *apiKeyName)
 	case "order_entry":
 		err = fix.RunOrderEntry(*fixConfigPath, *apiKeyName)
+	case "security_list":
+		err = fix.RunSecurityList(*fixConfigPath, *apiKeyName)
 	case "cancel_all":
 		err = fix.RunCancelAll(*fixConfigPath, *fixConfig2Path, *apiKeyName)
 	case "gen_password":

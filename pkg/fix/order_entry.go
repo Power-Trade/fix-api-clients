@@ -24,7 +24,7 @@ type FIXExampleAction = func() *quickfix.Message
 var (
 	lastMessageClOrdId = ""
 
-	possibleActions = []FIXExampleAction{
+	possibleActionsOE = []FIXExampleAction{
 		addOrder,
 		addOrderMatch,
 		cancelOrder, // Cancel existing order
@@ -148,7 +148,7 @@ func addOrderExecInst() *quickfix.Message {
 	return order.ToMessage()
 }
 
-func getActions() []FIXExampleAction {
+func getActions(possibleActions []FIXExampleAction) []FIXExampleAction {
 	actionCmds := strings.Split(*actionsCmd, ",")
 	if len(actionCmds) == 0 || actionCmds[0] == "" {
 		return possibleActions
@@ -185,7 +185,7 @@ func RunOrderEntry(cfgFileName string, apiKeyName string) error {
 	}
 	targetCompID, _ := app.Settings.GlobalSettings().Setting(config.TargetCompID)
 
-	actions := getActions()
+	actions := getActions(possibleActionsOE)
 	for {
 		for _, action := range actions {
 			time.Sleep(time.Second)
