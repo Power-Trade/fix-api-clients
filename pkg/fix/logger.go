@@ -3,13 +3,11 @@ package fix
 import (
 	"bytes"
 	"fmt"
-	"sort"
 	"strings"
 
 	"github.com/quickfixgo/field"
 	"github.com/quickfixgo/quickfix"
 	"github.com/quickfixgo/quickfix/datadictionary"
-	"golang.org/x/exp/maps"
 )
 
 type BeautyLogFactory struct {
@@ -22,8 +20,10 @@ const (
 	fixMessagePart_Trailer = 2
 	fixMessagePart_Group   = 3
 
-	printPrefix    = 32
-	printPrefixInc = 4
+	printPrefix         = 32
+	printPrefixInc      = 4
+	printPrefixIndexInc = 2
+	printArrayRepeat    = 8
 
 	FIX_XML_PATH = "spec/FIX44-PT.xml"
 )
@@ -74,20 +74,14 @@ func (b BeautyLog) BeautifyFIX(raw []byte) []byte {
 	msg.Header.Get(&msgType)
 
 	MessageDesc := b.dictionary.Messages[string(msgType.Value())]
-
-	emptyMap := func() *map[int]bool {
-		m := make(map[int]bool)
-		return &m
-	}
-
 	humanReadableFIX := b.BeautifyFIXString(string(raw))
 
 	// Ideal result using Java: https://stackoverflow.com/questions/6453879/how-to-log-quickfix-message-in-human-readable-format
 	return []byte(fmt.Sprintf("\nORIG:\n%s\n\nHEADER:\n%s\nBODY:\n%s\nTRAILER:\n%s\n",
 		humanReadableFIX,
-		b.BeautifyFieldMap(msg.Header.FieldMap, NewFieldDefs(b.dictionary.Header.Fields), fixMessagePart_Header, printPrefix, emptyMap()),
-		b.BeautifyFieldMap(msg.Body.FieldMap, NewFieldDefs(MessageDesc.Fields), fixMessagePart_Body, printPrefix, emptyMap()),
-		b.BeautifyFieldMap(msg.Trailer.FieldMap, NewFieldDefs(b.dictionary.Trailer.Fields), fixMessagePart_Trailer, printPrefix, emptyMap()),
+		b.BeautifyFieldMap(msg.Header.FieldMap, NewFieldDefs(b.dictionary.Header.Parts, b.dictionary.Header.Fields), fixMessagePart_Header, printPrefix, -1),
+		b.BeautifyFieldMap(msg.Body.FieldMap, NewFieldDefs(MessageDesc.Parts, MessageDesc.Fields), fixMessagePart_Body, printPrefix, -1),
+		b.BeautifyFieldMap(msg.Trailer.FieldMap, NewFieldDefs(b.dictionary.Trailer.Parts, b.dictionary.Trailer.Fields), fixMessagePart_Trailer, printPrefix, -1),
 	))
 }
 
@@ -95,112 +89,151 @@ func (b BeautyLog) BeautifyFIXString(event string) string {
 	return strings.ReplaceAll(event, "\x01", "|")
 }
 
-// tagOrder true if tag i should occur before tag j
-type tagOrder func(i, j quickfix.Tag) bool
-
-// ascending tags
-func normalFieldOrder(i, j quickfix.Tag) bool { return i < j }
-
-type tagSort struct {
-	tags    []quickfix.Tag
-	compare tagOrder
-}
-
-func (t tagSort) Len() int           { return len(t.tags) }
-func (t tagSort) Swap(i, j int)      { t.tags[i], t.tags[j] = t.tags[j], t.tags[i] }
-func (t tagSort) Less(i, j int) bool { return t.compare(t.tags[i], t.tags[j]) }
-
 type FieldDefs []*datadictionary.FieldDef
 
-func (t FieldDefs) Find(tag int) *datadictionary.FieldDef {
+func (t FieldDefs) Find(tag quickfix.Tag) *datadictionary.FieldDef {
 	for _, fieldDef := range t {
-		if fieldDef.Tag() == tag {
+		if fieldDef.Tag() == int(tag) {
 			return fieldDef
 		}
 	}
 	return nil
 }
 
-func NewFieldDefs(MapFields map[int]*datadictionary.FieldDef) FieldDefs {
-	return maps.Values(MapFields)
+func NewFieldDefs(Parts []datadictionary.MessagePart, MapFields map[int]*datadictionary.FieldDef) FieldDefs {
+	values := make([]*datadictionary.FieldDef, 0)
+	for _, part := range Parts {
+		// fmt.Printf("Looking for %s\n", part.Name())
+		switch rpart := part.(type) {
+		case datadictionary.Component:
+			{ // e.g. SecListGrp
+				for _, v := range rpart.Fields() {
+					values = append(values, v)
+				}
+			}
+		default:
+			{
+				for _, v := range MapFields {
+					if v.Name() == part.Name() {
+						values = append(values, v)
+						break
+					}
+				}
+			}
+		}
+	}
+	return values
 }
 
-func (b BeautyLog) BeautifyField(tag quickfix.Tag, name string, value quickfix.FIXBytes, desc string, prefix int) string {
-	return fmt.Sprintf(
-		"\t[%4d]\t%*s: %s [%s]\n",
-		tag,
-		prefix,
-		name,
-		value,
-		desc,
-	)
+func NewFieldDefsFromArr(MapFields []*datadictionary.FieldDef) FieldDefs {
+	return MapFields
 }
 
-func (b BeautyLog) BeautifyFieldMap(fm quickfix.FieldMap, fieldDefs FieldDefs, messagePart int, prefix int, ignoreTags *map[int]bool) string {
+func (b BeautyLog) BeautifyField(tag quickfix.Tag, name string, value quickfix.FIXBytes, desc string, prefix int, index int) string {
+
+	res := fmt.Sprintf("\t[%4d]", tag)
+	if index >= 0 {
+		// 1st field of an array
+		idxOffset := (prefix - printPrefix) * printPrefixIndexInc / printPrefixInc
+		idxStr := strings.Repeat(" ", idxOffset) + fmt.Sprintf("#%d", index)
+
+		res += fmt.Sprintf(
+			"%s    %*s",
+			idxStr,
+			(prefix - len(idxStr)),
+			name,
+		)
+	} else {
+		res += fmt.Sprintf(
+			"    %*s",
+			prefix,
+			name,
+		)
+	}
+	res += fmt.Sprintf(": %s [%s]", value, desc)
+
+	res += "\n"
+	return res
+}
+
+func (b BeautyLog) BeautifyFieldMap(fm quickfix.FieldMap, fieldDefs FieldDefs, messagePart int, prefix int, index int) string {
 
 	var res string
 	if messagePart != fixMessagePart_Group {
 		res = "--------------------------------------------------------------------\n"
 	}
 
-	sortedTags := tagSort{
-		tags:    fm.Tags(),
-		compare: normalFieldOrder,
-	}
-
-	sort.Sort(sortedTags)
-
-	tagsInComponents := make(map[int]bool)
-
-	for _, tag := range sortedTags.tags {
-
+	for _, gFieldDef := range fieldDefs {
 		var value quickfix.FIXBytes
-
-		fm.GetField(tag, &value)
+		tag := quickfix.Tag(gFieldDef.Tag())
+		err := fm.GetField(tag, &value)
+		if err != nil {
+			continue
+		}
 
 		fieldDesc, found := b.dictionary.FieldTypeByTag[int(tag)]
 		if found {
 			switch fieldDesc.Type {
 			case "NUMINGROUP":
+				res += b.BeautifyField(tag, fieldDesc.Name(), value, "", prefix, index) // ToDo: array = ${component}
 
-				res += b.BeautifyField(tag, fieldDesc.Name(), value, "", prefix)
+				var getChildFieldTags func(parent quickfix.Tag, sFieldDefs FieldDefs) quickfix.GroupTemplate
+				getChildFieldTags = func(parent quickfix.Tag, sFieldDefs FieldDefs) quickfix.GroupTemplate {
+					template := quickfix.GroupTemplate{}
 
-				template := quickfix.GroupTemplate{}
-				groupField := fieldDefs.Find(int(tag))
+					groupField := sFieldDefs.Find(parent)
+					if groupField == nil {
+						fmt.Printf("ERROR GROUP[%d]\n", tag)
+						return template
+					}
+
+					for _, subField := range groupField.Fields {
+						fieldDesc, _ := b.dictionary.FieldTypeByTag[subField.Tag()]
+						if subField.Tag() == int(parent) {
+							template = append(template, quickfix.GroupElement(quickfix.Tag(subField.Tag())))
+						}
+						if fieldDesc.Type == "NUMINGROUP" {
+							template = append(template, quickfix.GroupElement(quickfix.Tag(subField.Tag())))
+							subTemplate := getChildFieldTags(quickfix.Tag(subField.Tag()), NewFieldDefsFromArr(groupField.Fields))
+							template = append(template, subTemplate...)
+						} else {
+							template = append(template, quickfix.GroupElement(quickfix.Tag(subField.Tag())))
+						}
+					}
+
+					return template
+				}
+				template := getChildFieldTags(tag, fieldDefs)
+
+				groupField := fieldDefs.Find(tag)
 				if groupField == nil {
-					res += fmt.Sprintf("ERROR GROUP[%d]", tag)
+					fmt.Printf("ERROR GROUP[%d]\n", tag)
 					continue
 				}
-
-				for _, groupField := range groupField.Fields {
-					template = append(template, quickfix.GroupElement(quickfix.Tag(groupField.Tag())))
-				}
-
 				group := quickfix.NewRepeatingGroup(tag, template)
 				err := fm.GetGroup(group)
 				if err != nil {
-					res += fmt.Sprintf("ERROR GROUP[%d]", tag)
+					res += fmt.Sprintf("ERROR REPEATING GROUP[%d] of [%v]\n", tag, template)
 					continue
 				}
 
 				for i := 0; i < group.Len(); i++ {
 					g := group.Get(i)
-					res += b.BeautifyFieldMap(g.FieldMap, groupField.Fields, fixMessagePart_Group, prefix+printPrefixInc, &tagsInComponents)
+					idx := i
+					if group.Len() == 1 {
+						idx = -1
+					}
+					res += b.BeautifyFieldMap(g.FieldMap, NewFieldDefsFromArr(groupField.Fields), fixMessagePart_Group, prefix+printPrefixInc, idx)
 				}
 
 			default:
-				if _, ok := tagsInComponents[fieldDesc.Tag()]; ok {
-					// Tag is a member of a child's component
-					// It was already printed as a part of the component
-					continue
-				}
-				(*ignoreTags)[fieldDesc.Tag()] = true
 				strValue := fieldDesc.Enums[string(value)]
-				res += b.BeautifyField(tag, fieldDesc.Name(), value, strValue.Description, prefix)
+				res += b.BeautifyField(tag, fieldDesc.Name(), value, strValue.Description, prefix, index)
 			}
 		} else {
 			res += fmt.Sprintf("ERROR: TAG[%d]=VALUE[%s]\n", tag, value)
 		}
+		index = -1
 	}
 
 	return res
