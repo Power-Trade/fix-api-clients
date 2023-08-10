@@ -1,0 +1,16 @@
+[[FIX_SecurityDefinition]]
+=== *Security Definition <d>*
+
+https://www.onixs.biz/fix-dictionary/4.4/msgType_d_100.html[FIX4.4 Standard]
+
+:msgtype: d
+.`Security Definition` fields:
+include::_table_begin_1.asciidoc[]
+|===================================================
+| Tag | Name | Required | Description | Valid Values
+
+include::../field/Header.asciidoc[]
+5+|TBD
+include::../field/Trailer.asciidoc[]
+
+|===================================================

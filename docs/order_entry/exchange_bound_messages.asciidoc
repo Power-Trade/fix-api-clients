@@ -3,3 +3,5 @@
 include::../FIX/message/NewOrderSingle.asciidoc[]
 include::../FIX/message/NewOrderMultileg.asciidoc[]
 include::../FIX/message/OrderCancelRequest.asciidoc[]
+include::../FIX/message/SecurityDefinitionRequest.asciidoc[]
+include::../FIX/message/SecurityListRequest.asciidoc[]

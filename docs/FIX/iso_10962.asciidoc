@@ -1,0 +1,8 @@
+=== *CFICode (ISO 10962)*
+
+https://en.wikipedia.org/wiki/ISO_10962
+
+* `OCECCS` - European cash-settled currency option Call
+* `OPECCS` - European cash-settled currency option Put
+* `IFXXXP` - Spot
+* `FFCCSX` - Cash-settled currency future, perpetual

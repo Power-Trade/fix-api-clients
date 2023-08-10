@@ -1,0 +1,29 @@
+==== *Security Status*
+[source]
+----
+8=FIX.4.4|9=147|35=f|34=9|49=PT-OE|52=20230810-11:55:16.128|56=17b92233f33a4d9a1688fe7d2a5be705|15=USD|22=8|48=4|55=BTC-USD|324=1691668516128015|326=17|461=IFXXXP|10=057|
+
+HEADER:
+--------------------------------------------------------------------
+	[   8]                         BeginString: FIX.4.4 []
+	[   9]                          BodyLength: 147 []
+	[  35]                             MsgType: f [SECURITY_STATUS]
+	[  49]                        SenderCompID: PT-OE []
+	[  56]                        TargetCompID: 17b92233f33a4d9a1688fe7d2a5be705 []
+	[  34]                           MsgSeqNum: 9 []
+	[  52]                         SendingTime: 20230810-11:55:16.128 []
+
+BODY:
+--------------------------------------------------------------------
+	[ 324]                 SecurityStatusReqID: 1691668516128015 []
+	[  55]                              Symbol: BTC-USD []
+	[  48]                          SecurityID: 4 []
+	[  22]                    SecurityIDSource: 8 [EXCHANGE_SYMBOL]
+	[ 461]                             CFICode: IFXXXP []
+	[  15]                            Currency: USD []
+	[ 326]               SecurityTradingStatus: 17 [READY_TO_TRADE]
+
+TRAILER:
+--------------------------------------------------------------------
+	[  10]                            CheckSum: 057 []
+----

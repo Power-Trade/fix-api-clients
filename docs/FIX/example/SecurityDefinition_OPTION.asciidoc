@@ -1,0 +1,39 @@
+==== *Security Definition: Option*
+[source]
+----
+8=FIX.4.4|9=261|35=d|34=1420|49=PT-OE|52=20230810-11:55:16.196|56=17b92233f33a4d9a1688fe7d2a5be705|15=USD|22=8|48=14548|55=BTC-20240628-30000C|202=30000|231=1|320=1691668516128015|322=R1691668516128015|323=1|461=OCECCS|541=20240628|711=1|311=BTC|309=3|305=8|463=IFXXXP|318=USD|10=045|
+
+HEADER:
+--------------------------------------------------------------------
+	[   8]                         BeginString: FIX.4.4 []
+	[   9]                          BodyLength: 261 []
+	[  35]                             MsgType: d [SECURITY_DEFINITION]
+	[  49]                        SenderCompID: PT-OE []
+	[  56]                        TargetCompID: 17b92233f33a4d9a1688fe7d2a5be705 []
+	[  34]                           MsgSeqNum: 1420 []
+	[  52]                         SendingTime: 20230810-11:55:16.196 []
+
+BODY:
+--------------------------------------------------------------------
+	[ 320]                       SecurityReqID: 1691668516128015 []
+	[ 322]                  SecurityResponseID: R1691668516128015 []
+	[ 323]                SecurityResponseType: 1 [ACCEPT_SECURITY_PROPOSAL_AS_IS]
+	[  55]                              Symbol: BTC-20240628-30000C []
+	[  48]                          SecurityID: 14548 []
+	[  22]                    SecurityIDSource: 8 [EXCHANGE_SYMBOL]
+	[ 461]                             CFICode: OCECCS []
+	[ 541]                        MaturityDate: 20240628 []
+	[ 202]                         StrikePrice: 30000 []
+	[ 231]                  ContractMultiplier: 1 []
+	[ 711]                       NoUnderlyings: 1 []
+	[ 311]                        UnderlyingSymbol: BTC []
+	[ 309]                    UnderlyingSecurityID: 3 []
+	[ 305]              UnderlyingSecurityIDSource: 8 []
+	[ 463]                       UnderlyingCFICode: IFXXXP []
+	[ 318]                      UnderlyingCurrency: USD []
+	[  15]                            Currency: USD []
+
+TRAILER:
+--------------------------------------------------------------------
+	[  10]                            CheckSum: 045 []
+----

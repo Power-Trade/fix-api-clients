@@ -1,0 +1,16 @@
+[[FIX_SecurityStatus]]
+=== *Security Status <f>*
+
+https://www.onixs.biz/fix-dictionary/4.4/msgType_f_102.html[FIX4.4 Standard]
+
+:msgtype: f
+.`Security Status` fields:
+include::_table_begin_1.asciidoc[]
+|===================================================
+| Tag | Name | Required | Description | Valid Values
+
+include::../field/Header.asciidoc[]
+5+|TBD
+include::../field/Trailer.asciidoc[]
+
+|===================================================

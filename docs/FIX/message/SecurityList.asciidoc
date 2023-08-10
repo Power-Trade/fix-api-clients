@@ -1,0 +1,16 @@
+[[FIX_SecurityList]]
+=== *Security List <y>*
+
+https://www.onixs.biz/fix-dictionary/4.4/msgType_y_121.html[FIX4.4 Standard]
+
+:msgtype: y
+.`Security List` fields:
+include::_table_begin_1.asciidoc[]
+|===================================================
+| Tag | Name | Required | Description | Valid Values
+
+include::../field/Header.asciidoc[]
+5+|TBD
+include::../field/Trailer.asciidoc[]
+
+|===================================================

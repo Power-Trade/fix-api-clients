@@ -30,6 +30,10 @@ include::examples.asciidoc[]
 |=================================
 | Date | Version | Notes
 
+|2023/08/10
+|1.01
+|SecurityDefinitionRequest, SecurityDefinition, SecurityStatus, SecurityListRequest, SecurityList
+
 |2023/08/01
 |1.0
 |Public release

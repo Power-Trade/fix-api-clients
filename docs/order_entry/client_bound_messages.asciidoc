@@ -2,3 +2,6 @@
 
 include::../FIX/message/ExecutionReport.asciidoc[]
 include::../FIX/message/OrderCancelReject.asciidoc[]
+include::../FIX/message/SecurityDefinition.asciidoc[]
+include::../FIX/message/SecurityStatus.asciidoc[]
+include::../FIX/message/SecurityList.asciidoc[]
