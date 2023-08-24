@@ -1,0 +1,26 @@
+|58
+|https://www.onixs.biz/fix-dictionary/4.4/tagNum_58.html[Text]
+|Y
+|
+Additional information:
+https://docs.api.power.trade/#trading_rule[trading_rule]
+
+|JSON, all fields are strings representing monetary numbers:
+
+`"minimum_price"`
+
+`"maximum_price"`
+
+`"price_step"` - tick size
+
+`"minimum_quantity"`
+
+`"maximum_quantity"`
+
+`"quantity_step"` - lot size
+
+`"minimum_value"`
+
+`"maximum_value"`
+
+e.g.`{"minimum_price":"0.50","maximum_price":"1000000.00","price_step":"0.50","minimum_quantity":"0.00010000","maximum_quantity":"10000.00000000","quantity_step":"0.00010000","minimum_value":"0.0000500000","maximum_value":"10000000000.0000000000"}`

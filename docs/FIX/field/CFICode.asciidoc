@@ -1,0 +1,5 @@
+|461
+|https://www.onixs.biz/fix-dictionary/4.4/tagNum_461.html[CFICode]
+|Y
+|Indicates the type of security using ISO 10962 standard
+|See <<CFI_Code,CFICode>>

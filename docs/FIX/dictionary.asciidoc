@@ -6,3 +6,6 @@ No custom tags are used.
 === *Downloads*
 
 https://raw.githubusercontent.com/quickfix/quickfix/master/spec/FIX44.xml
+
+
+include::iso_10962.asciidoc[]

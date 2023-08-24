@@ -8,7 +8,7 @@
 :sectnums:
 
 :fix: oe
-:VERSION: VERSION 1.0
+:VERSION: VERSION 1.2
 {VERSION} (see <<Order_Entry_FIX_API_Revision_History,Revision History>>)
 
 include::introduction.asciidoc[]
@@ -30,15 +30,20 @@ include::examples.asciidoc[]
 |=================================
 | Date | Version | Notes
 
-|2023/08/10
-|1.01
+|2023-08-24
+|1.2
+|Fill gaps in SecurityDefinitionRequest, SecurityDefinition, SecurityStatus, SecurityListRequest, SecurityList;
+Add configuration examples for using SSL
+
+|2023-08-10
+|1.1
 |SecurityDefinitionRequest, SecurityDefinition, SecurityStatus, SecurityListRequest, SecurityList
 
-|2023/08/01
+|2023-08-01
 |1.0
 |Public release
 
-|2023/07/30
+|2023-07-30
 |0.1
 |Initial Order Entry FIX API documentation
 

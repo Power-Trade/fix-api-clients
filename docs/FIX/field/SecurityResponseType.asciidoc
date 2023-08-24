@@ -1,0 +1,6 @@
+|323
+|https://www.onixs.biz/fix-dictionary/4.4/tagNum_323.html[SecurityResponseType]
+|Y
+|Type of Security Definition <d> message response.
+|
+`"1"` = Accept security proposal as is

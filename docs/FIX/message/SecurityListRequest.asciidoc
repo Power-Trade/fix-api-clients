@@ -12,7 +12,9 @@ include::_table_begin_1.asciidoc[]
 | Tag | Name | Required | Description | Valid Values
 
 include::../field/Header.asciidoc[]
-5+|TBD
+include::../field/SecurityReqID.asciidoc[]
+include::../field/SecurityListRequestType.asciidoc[]
+include::../field/Symbol_SecurityRequest.asciidoc[]
 include::../field/Trailer.asciidoc[]
 
 |===================================================

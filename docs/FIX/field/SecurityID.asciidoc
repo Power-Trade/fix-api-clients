@@ -1,0 +1,6 @@
+|48
+|https://www.onixs.biz/fix-dictionary/4.4/tagNum_48.html[SecurityID]
+|N
+|Required if order is visible in the Order Book
+|
+The PowerTrade-assigned https://docs.api.power.trade/#tradeable_entity_id[tradeable_entity_id].

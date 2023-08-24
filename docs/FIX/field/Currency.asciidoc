@@ -1,0 +1,5 @@
+|15
+|https://www.onixs.biz/fix-dictionary/4.4/tagNum_15.html[Currency]
+|Y
+|Identifies currency used for price.
+|String

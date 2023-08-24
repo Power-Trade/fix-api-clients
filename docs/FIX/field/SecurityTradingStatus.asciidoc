@@ -1,0 +1,12 @@
+|326
+|https://www.onixs.biz/fix-dictionary/4.4/tagNum_326.html[SecurityTradingStatus]
+|Y
+|Identifies the trading status applicable to the transaction.
+|
+https://docs.api.power.trade/#trading_state[trading_state]
+
+`"2"` = Trading Halt
+
+`"17"` = Ready to trade
+
+`"18"` = Not Available for trading

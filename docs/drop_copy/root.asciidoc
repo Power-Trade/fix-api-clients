@@ -8,7 +8,7 @@
 :sectnums:
 
 :fix: dc
-:VERSION: VERSION 1.0
+:VERSION: VERSION 1.2
 {VERSION} (see <<Drop_Copy_FIX_API_Revision_History,Revision History>>)
 
 include::introduction.asciidoc[]
@@ -28,11 +28,15 @@ include::examples.asciidoc[]
 |=================================
 | Date | Version | Notes
 
-|2023/08/01
+|2023-08-24
+|1.0
+|Add configuration examples for using SSL
+
+|2023-08-01
 |1.0
 |Public release
 
-|2023/07/30
+|2023-07-30
 |0.1
 |Initial Drop Copy FIX API documentation
 

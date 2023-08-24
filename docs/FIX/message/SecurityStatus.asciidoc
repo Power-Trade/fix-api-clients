@@ -10,7 +10,17 @@ include::_table_begin_1.asciidoc[]
 | Tag | Name | Required | Description | Valid Values
 
 include::../field/Header.asciidoc[]
-5+|TBD
+include::../field/SecurityReqID.asciidoc[]
+include::../field/SecurityResponseID.asciidoc[]
+include::../field/SecurityResponseType.asciidoc[]
+include::../field/Symbol.asciidoc[]
+include::../field/SecurityID.asciidoc[]
+include::../field/SecurityIDSource.asciidoc[]
+include::../field/CFICode.asciidoc[]
+include::../field/Underlyings.asciidoc[]
+include::../field/Currency.asciidoc[]
+include::../field/SecurityTradingStatus.asciidoc[]
+include::../field/Text_SL.asciidoc[]
 include::../field/Trailer.asciidoc[]
 
 |===================================================

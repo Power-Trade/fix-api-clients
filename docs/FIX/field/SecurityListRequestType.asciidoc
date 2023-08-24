@@ -1,0 +1,8 @@
+|559
+|https://www.onixs.biz/fix-dictionary/4.4/tagNum_559.html[SecurityListRequestType]
+|Y
+|Identifies the type/criteria 
+|
+`"0"` = Symbol <55> - query by symbol prefix
+
+`"4"` = All Securities

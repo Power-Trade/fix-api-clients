@@ -1,0 +1,21 @@
+|146
+|https://www.onixs.biz/fix-dictionary/4.4/tagNum_146.htmll[NoRelatedSym]
+|Y
+|Specifies the number of repeating symbols specified.
+|
+
+5+|Component Block `RelatedSym`:
+
+include::../field/Symbol.asciidoc[]
+include::../field/SecurityID.asciidoc[]
+include::../field/SecurityIDSource.asciidoc[]
+include::../field/CFICode.asciidoc[]
+include::../field/Underlyings.asciidoc[]
+include::../field/Currency.asciidoc[]
+include::../field/Text_SL.asciidoc[]
+
+5+|The end of Component Block `RelatedSym`
+
+
+
+

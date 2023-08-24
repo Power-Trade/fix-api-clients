@@ -5,10 +5,20 @@ Steps to get connected to our FIX infrastructure:
 
 === *Get connected*
 
-There are 4 options for production FIX connectivity to PowerTrade:
+There are 2 options for production FIX connectivity to PowerTrade:
 
 1. Over Internet with TLS encryption using server-side certificate;
 2. Over Internet with mutual TLS: using signed certificates on client and server sides.
+
+If you use https://pkg.go.dev/github.com/quickfixgo/quickfix@v0.7.0/config#hdr-SocketUseSSL[QuickFIXgo], please specify
+```
+SocketUseSSL=Y
+```
+
+or if you use http://quickfixn.org/tutorial/configuration.html[QuickFIXn]
+```
+SocketUseSSL=Y
+```
 
 * TEST: 
 
