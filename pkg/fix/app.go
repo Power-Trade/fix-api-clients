@@ -2,6 +2,7 @@ package fix
 
 import (
 	"bytes"
+	"errors"
 	"fmt"
 	"io"
 	"os"
@@ -19,6 +20,12 @@ type TradeClient struct {
 	SenderCompID string
 	PrivateKey   []byte
 	Settings     *quickfix.Settings
+	connected    chan bool
+}
+
+type ApplicationWithWait interface {
+	quickfix.Application
+	WaitConnect() bool
 }
 
 func NewTradeClient(cfgFilename string, keyFilename string) (*TradeClient, error) {
@@ -36,6 +43,7 @@ func NewTradeClient(cfgFilename string, keyFilename string) (*TradeClient, error
 		SenderCompID: apiKey,
 		PrivateKey:   privateKey,
 		Settings:     settings,
+		connected:    make(chan bool, 1),
 	}
 	return app, nil
 }
@@ -67,7 +75,7 @@ SenderCompID=`+apiKey+`
 	return settings, nil
 }
 
-func StartConnection(app quickfix.Application, settings *quickfix.Settings) error {
+func StartConnection(app ApplicationWithWait, settings *quickfix.Settings) error {
 	fileLogFactory := NewBeautyLogFactory(quickfix.NewScreenLogFactory())
 
 	initiator, err := quickfix.NewInitiator(app, quickfix.NewMemoryStoreFactory(), settings, fileLogFactory)
@@ -78,6 +86,12 @@ func StartConnection(app quickfix.Application, settings *quickfix.Settings) erro
 	err = initiator.Start()
 	if err != nil {
 		return fmt.Errorf("unable to start Initiator: %s", err)
+	}
+
+	// Wait for connection being established - otherwise QuickFIX will drop our requests
+	isConnected := app.WaitConnect()
+	if !isConnected {
+		return errors.New("not connected")
 	}
 
 	return nil
@@ -94,6 +108,14 @@ func (e TradeClient) OnLogout(sessionID quickfix.SessionID) {}
 
 // FromAdmin implemented as part of Application interface
 func (e TradeClient) FromAdmin(msg *quickfix.Message, sessionID quickfix.SessionID) (reject quickfix.MessageRejectError) {
+	msgTypeStr, _ := msg.MsgType()
+	msgType := enum.MsgType(msgTypeStr)
+	if msgType == enum.MsgType_LOGON {
+		e.connected <- true
+	} else if msgType == enum.MsgType_LOGOUT {
+		e.connected <- false
+		close(e.connected)
+	}
 	fmt.Printf("[FROM ADMIN]\n\n")
 	return nil
 }
@@ -127,4 +149,9 @@ func (e TradeClient) ToApp(msg *quickfix.Message, sessionID quickfix.SessionID) 
 func (e TradeClient) FromApp(msg *quickfix.Message, sessionID quickfix.SessionID) (reject quickfix.MessageRejectError) {
 	fmt.Printf("[FROM APP]\n\n")
 	return
+}
+
+func (e TradeClient) WaitConnect() bool {
+	isConnected := <-e.connected
+	return isConnected
 }
