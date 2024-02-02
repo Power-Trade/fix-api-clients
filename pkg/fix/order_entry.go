@@ -204,3 +204,53 @@ func RunOrderEntry(cfgFileName string, apiKeyName string) error {
 		}
 	}
 }
+
+func RunOrderEntryManual(cfgFileName string, apiKeyName string) error {
+	app, err := NewTradeClient(cfgFileName, apiKeyName)
+	if err != nil {
+		return err
+	}
+
+	err = StartConnection(app, app.Settings)
+	if err != nil {
+		return err
+	}
+	targetCompID, _ := app.Settings.GlobalSettings().Setting(config.TargetCompID)
+
+	for {
+		time.Sleep(time.Second)
+
+		//clOrdId := fmt.Sprint(pt.DefaultTokenGenerator.Next())
+		clOrdId := "123321"
+
+		lastMessageClOrdId = clOrdId // Store for cancel
+
+		order := newordersingle.New(
+			field.NewClOrdID(clOrdId), // ToDo: FIX server should allow a non-duplicate char[19], not only increasing int56
+			field.NewSide(enum.Side_BUY),
+			field.NewTransactTimeWithPrecision(time.Now(), quickfix.Nanos),
+			field.NewOrdType(enum.OrdType_LIMIT),
+		)
+		//order.Set(field.NewSendingTime(time.Now()))
+		order.Set(field.NewSymbol("BTC-USD-PERPETUAL"))
+		order.Set(field.NewOrderQty(decimal.NewFromFloat(0.01), 2))
+
+		order.Set(field.NewPrice(decimal.NewFromFloat(1), 0))
+
+		order.Set(field.NewTimeInForce(enum.TimeInForce_GOOD_TILL_CANCEL))
+		//order.Set(field.NewExpireTimeWithPrecision(time.Now().AddDate(0, 0, 1), quickfix.Nanos))
+
+		msg := order.ToMessage()
+
+		msg.Header.Set(field.NewSenderCompID(app.SenderCompID))
+		msg.Header.Set(field.NewTargetCompID(targetCompID))
+
+		fmt.Printf("Sending: %s\n", msg.String())
+
+		err := quickfix.Send(msg)
+
+		if err != nil {
+			return err
+		}
+	}
+}
