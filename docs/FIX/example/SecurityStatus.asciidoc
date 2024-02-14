@@ -25,6 +25,7 @@ BODY:
 	[ 461]                             CFICode: IFXXXP []
 	[  15]                            Currency: USD []
 	[ 326]               SecurityTradingStatus: 17 [READY_TO_TRADE]
+	[  31]                              LastPx: 43500.00 []
 	[  58]                                Text: {"minimum_price":"0.10","maximum_price":"1000000.00","price_step":"0.10","minimum_quantity":"0.00010000","maximum_quantity":"10000.00000000","quantity_step":"0.00010000","minimum_value":"0.0000100000","maximum_value":"10000000000.0000000000"} []
 
 TRAILER:
