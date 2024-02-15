@@ -107,9 +107,7 @@ func NewFieldDefs(Parts []datadictionary.MessagePart, MapFields map[int]*datadic
 		switch rpart := part.(type) {
 		case datadictionary.Component:
 			{ // e.g. SecListGrp
-				for _, v := range rpart.Fields() {
-					values = append(values, v)
-				}
+				values = append(values, rpart.Fields()...)
 			}
 		default:
 			{
@@ -188,7 +186,7 @@ func (b BeautyLog) BeautifyFieldMap(fm quickfix.FieldMap, fieldDefs FieldDefs, m
 					}
 
 					for _, subField := range groupField.Fields {
-						fieldDesc, _ := b.dictionary.FieldTypeByTag[subField.Tag()]
+						fieldDesc := b.dictionary.FieldTypeByTag[subField.Tag()]
 						if subField.Tag() == int(parent) {
 							template = append(template, quickfix.GroupElement(quickfix.Tag(subField.Tag())))
 						}

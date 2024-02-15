@@ -3,4 +3,6 @@
 |C
 |Price of this (last) fill.
 Required if `ExecType <150> is F = Trade`.
+
+For https://www.onixs.biz/fix-dictionary/4.4/msgtype_f_102.html[Security Status <f>] represents the last price for that security, absent if security has no trades.
 |`.price` field of https://docs.api.power.trade/#trade[trade]

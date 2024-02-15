@@ -29,6 +29,9 @@ func RunGeneratePassword(cfgFilename string, apiKeyName string, dur time.Duratio
 		"api",
 		dur,
 	)
+	if err != nil {
+		return err
+	}
 
 	fmt.Printf("JWT: %s\n", password)
 

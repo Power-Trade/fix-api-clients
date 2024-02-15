@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.18">
+<meta name="generator" content="Asciidoctor 2.0.20">
 <title>PowerTrade Order Entry FIX API Specification</title>
 <style>
 /*! normalize.css v2.1.2 | MIT License | git.io/normalize */
@@ -2422,7 +2422,8 @@ as understood by the exchange OrdStatus &lt;39&gt; and the purpose of the messag
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="https://www.onixs.biz/fix-dictionary/4.4/tagNum_31.html">LastPx</a></p></td>
 <td class="tableblock halign-left valign-middle"><p class="tableblock">C</p></td>
 <td class="tableblock halign-left valign-middle"><p class="tableblock">Price of this (last) fill.
-Required if <code>ExecType &lt;150&gt; is F = Trade</code>.</p></td>
+Required if <code>ExecType &lt;150&gt; is F = Trade</code>.</p>
+<p class="tableblock">For <a href="https://www.onixs.biz/fix-dictionary/4.4/msgtype_f_102.html">Security Status &lt;f&gt;</a> represents the last price for that security, absent if security has no trades.</p></td>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><code>.price</code> field of <a href="https://docs.api.power.trade/#trade">trade</a></p></td>
 </tr>
 <tr>
@@ -2849,6 +2850,15 @@ See Symbol &lt;55&gt; field for description</p></td>
 <p class="tableblock"><code>"2"</code> = Trading Halt</p>
 <p class="tableblock"><code>"17"</code> = Ready to trade</p>
 <p class="tableblock"><code>"18"</code> = Not Available for trading</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">31</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="https://www.onixs.biz/fix-dictionary/4.4/tagNum_31.html">LastPx</a></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">C</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">Price of this (last) fill.
+Required if <code>ExecType &lt;150&gt; is F = Trade</code>.</p>
+<p class="tableblock">For <a href="https://www.onixs.biz/fix-dictionary/4.4/msgtype_f_102.html">Security Status &lt;f&gt;</a> represents the last price for that security, absent if security has no trades.</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><code>.price</code> field of <a href="https://docs.api.power.trade/#trade">trade</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-middle"><p class="tableblock">58</p></td>
@@ -3897,6 +3907,7 @@ BODY:
 	[ 461]                             CFICode: IFXXXP []
 	[  15]                            Currency: USD []
 	[ 326]               SecurityTradingStatus: 17 [READY_TO_TRADE]
+	[  31]                              LastPx: 43500.00 []
 	[  58]                                Text: {"minimum_price":"0.10","maximum_price":"1000000.00","price_step":"0.10","minimum_quantity":"0.00010000","maximum_quantity":"10000.00000000","quantity_step":"0.00010000","minimum_value":"0.0000100000","maximum_value":"10000000000.0000000000"} []
 
 TRAILER:
