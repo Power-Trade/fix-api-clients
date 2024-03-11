@@ -36,6 +36,8 @@ func main() {
 		err = fix.RunOrderEntry(*fixConfigPath, *apiKeyName)
 	case "order_entry_manual":
 		err = fix.RunOrderEntryManual(*fixConfigPath, *apiKeyName)
+	case "order_entry_perf":
+		err = fix.RunOrderEntryPerf(*fixConfigPath, *apiKeyName)
 	case "security_list":
 		err = fix.RunSecurityList(*fixConfigPath, *apiKeyName)
 	case "cancel_all":
