@@ -1,5 +1,0 @@
-=== *NewOrderMultileg: RFQ Limit*
-ifeval::["{fix}" == "oe"]
-include::NewOrderMultileg_Limit.asciidoc[]
-endif::[]
-include::ExecutionReport_RFQ.asciidoc[]

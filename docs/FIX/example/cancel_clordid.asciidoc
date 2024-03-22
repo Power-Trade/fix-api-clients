@@ -1,5 +1,0 @@
-=== *Cancel by ClOrdID*
-ifeval::["{fix}" == "oe"]
-include::CancelOrder_ClOrdID.asciidoc[]
-endif::[]
-include::ExecutionReport_CancelClOrdID.asciidoc[]

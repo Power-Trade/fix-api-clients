@@ -1,6 +1,0 @@
-|10
-|https://www.onixs.biz/fix-dictionary/4.4/tagNum_10.html[CheckSum]
-|Y
-|Message Checksum, zero-padded 3 chars (e.g. "052").
-Must be last field in the message.
-|https://www.onixs.biz/fix-dictionary/4.2/app_b.html[Value calculated by the standard algorithm]

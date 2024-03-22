@@ -1,5 +1,0 @@
-|320
-|https://www.onixs.biz/fix-dictionary/4.4/tagNum_320.html[SecurityReqID]
-|Y
-|Unique ID
-|String

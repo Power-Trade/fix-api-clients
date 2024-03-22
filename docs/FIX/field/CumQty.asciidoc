@@ -1,5 +1,0 @@
-|14
-|https://www.onixs.biz/fix-dictionary/4.4/tagNum_14.html[CumQty]
-|Y
-|Total quantity (e.g. number of shares) filled.
-|Quantity

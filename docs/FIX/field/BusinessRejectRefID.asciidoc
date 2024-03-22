@@ -1,5 +1,0 @@
-|379
-|https://www.onixs.biz/fix-dictionary/4.4/tagNum_379.html[BusinessRejectRefID]
-|Y
-|The value of the business level ID field being referenced.
-|

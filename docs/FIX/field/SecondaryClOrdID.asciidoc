@@ -1,8 +1,0 @@
-|526
-|https://www.onixs.biz/fix-dictionary/4.4/tagNum_526.html[SecondaryClOrdID]
-|N
-|
-|
-Right 16 bytes from `client_reference` provided by a client in https://docs.api.power.trade/#enter_order[enter_order] request
-
-Characters in ASCII range 32-127 are allowed

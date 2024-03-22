@@ -1,8 +1,0 @@
-|198
-|https://www.onixs.biz/fix-dictionary/4.4/tagNum_198.html[SecondaryOrderID]
-|C
-|Required if order is visible in the Order Book
-|
-The PowerTrade-assigned `display_order_id`, appears in Public Market Data: https://docs.api.power.trade/#Service_Guide_Market_Data[Session-based Service], https://power-trade.github.io/api-docs-ws-md-feeds/[Simplified MD Feeds].
-
-https://docs.api.power.trade/#display_order_id[display_order_id]

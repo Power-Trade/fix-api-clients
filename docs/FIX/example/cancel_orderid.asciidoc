@@ -1,5 +1,0 @@
-=== *Cancel by OrderID*
-ifeval::["{fix}" == "oe"]
-include::CancelOrder_OrderID.asciidoc[]
-endif::[]
-include::ExecutionReport_CancelOrderID.asciidoc[]

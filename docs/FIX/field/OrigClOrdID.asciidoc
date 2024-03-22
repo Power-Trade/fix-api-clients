@@ -1,5 +1,0 @@
-|41
-|https://www.onixs.biz/fix-dictionary/4.4/tagNum_41.html[OrigClOrdID]
-|C
-|Unique ID of the Order.
-|https://docs.api.power.trade/#order_token[order_token]

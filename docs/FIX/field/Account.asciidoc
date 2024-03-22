@@ -1,5 +1,0 @@
-|1
-|https://www.onixs.biz/fix-dictionary/4.4/tagNum_1.html[Account]
-|Y
-|Identifier of the party associated with the order.
-|https://docs.api.power.trade/#account_id[account_id]

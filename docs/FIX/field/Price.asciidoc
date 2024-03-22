@@ -1,5 +1,0 @@
-|44
-|https://www.onixs.biz/fix-dictionary/4.4/tagNum_44.html[Price]
-|C
-|Order Price
-|Required for OrdType=LIMIT orders
