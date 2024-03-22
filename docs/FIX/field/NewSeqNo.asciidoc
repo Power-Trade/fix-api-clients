@@ -1,5 +1,0 @@
-|36
-|https://www.onixs.biz/fix-dictionary/4.4/tagNum_36.html[NewSeqNo]
-|Y
-|New sequence number. The receiver should expect this to be the sequence number of the following message.
-|

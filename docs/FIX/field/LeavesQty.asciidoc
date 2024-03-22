@@ -1,5 +1,0 @@
-|151
-|https://www.onixs.biz/fix-dictionary/4.4/tagNum_151.html[LeavesQty]
-|Y
-|Quantity open for further execution. If the `OrdStatus <39>` is `4 = Canceled` or `8 = Rejected` (in which case the order is no longer active) then `LeavesQty <151>` could be `0`, otherwise `LeavesQty <151> = OrderQty <38> - CumQty <14>`.
-|Quantity

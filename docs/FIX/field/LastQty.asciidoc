@@ -1,6 +1,0 @@
-|32
-|https://www.onixs.biz/fix-dictionary/4.4/tagNum_32.html[LastQty]
-|C
-|Quantity (e.g. shares) of the fill. This field is only present when the order is updated due to a match on the exchange.
-Required if `ExecType <150> is F = Trade`.
-|`.quantity` field of https://docs.api.power.trade/#trade[trade]

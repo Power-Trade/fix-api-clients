@@ -1,6 +1,0 @@
-|321
-|https://www.onixs.biz/fix-dictionary/4.4/tagNum_321.html[SecurityRequestType]
-|Y
-|Type of Security Definition Request
-|
-`"3"` = Request List Securities

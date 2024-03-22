@@ -1,7 +1,0 @@
-|18
-|https://www.onixs.biz/fix-dictionary/4.4/tagNum_18.html[ExecInst]
-|N
-|Used to specify values for different order types.
-If more than one instruction is applicable to an order, this field can contain multiple instructions separated by space.
-|
-`"6"` = Participate Do Not Initiate

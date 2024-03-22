@@ -1,6 +1,0 @@
-|372
-|https://www.onixs.biz/fix-dictionary/4.4/tagNum_372.html[RefMsgType]
-|Y
-|The MsgType <35> of the rejected message.
-|
-

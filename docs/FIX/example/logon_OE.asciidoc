@@ -1,3 +1,0 @@
-=== *Logon*
-include::Logon_OE_request.asciidoc[]
-include::Logon_OE_response.asciidoc[]

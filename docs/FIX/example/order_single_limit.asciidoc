@@ -1,7 +1,0 @@
-=== *NewOrderSingle: Limit*
-ifeval::["{fix}" == "oe"]
-include::NewOrderSingle_Limit.asciidoc[]
-endif::[]
-include::ExecutionReport_LimitPending.asciidoc[]
-include::ExecutionReport_LimitNew.asciidoc[]
-include::ExecutionReport_LimitTrade.asciidoc[]

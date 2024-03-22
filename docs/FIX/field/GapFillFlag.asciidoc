@@ -1,6 +1,0 @@
-|123
-|https://www.onixs.biz/fix-dictionary/4.4/tagNum_123.html[GapFillFlag]
-|Y
-|Indicates that the sender is skipping messages rather than resending them.
-|
-`"Y"` = Gap Fill message

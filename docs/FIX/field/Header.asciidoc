@@ -1,1 +1,0 @@
-5+| Header with MsgType={msgtype}
