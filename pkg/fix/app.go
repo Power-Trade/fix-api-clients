@@ -79,7 +79,8 @@ SenderCompID=`+apiKey+`
 }
 
 func StartConnection(app ApplicationWithWait, settings *quickfix.Settings) error {
-	fileLogFactory := NewBeautyLogFactory(quickfix.NewScreenLogFactory())
+	//fileLogFactory := NewBeautyLogFactory(quickfix.NewScreenLogFactory())
+	fileLogFactory := quickfix.NewNullLogFactory()
 
 	initiator, err := quickfix.NewInitiator(app, quickfix.NewMemoryStoreFactory(), settings, fileLogFactory)
 	if err != nil {
@@ -124,6 +125,7 @@ func (e *TradeClient) FromAdmin(msg *quickfix.Message, sessionID quickfix.Sessio
 		e.connectCond.L.Unlock()
 		e.connectCond.Broadcast()
 	}
+	//fmt.Printf("[FROM ADMIN]\n\n")
 	return nil
 }
 
@@ -143,18 +145,18 @@ func (e *TradeClient) ToAdmin(msg *quickfix.Message, sessionID quickfix.SessionI
 		msg.Body.Set(field.NewPassword(password))
 		msg.Body.Set(field.NewResetSeqNumFlag(true))
 	}
-	fmt.Printf("\n[TO ADMIN]:\n")
+	//fmt.Printf("\n[TO ADMIN]:\n")
 }
 
 // ToApp implemented as part of Application interface
 func (e *TradeClient) ToApp(msg *quickfix.Message, sessionID quickfix.SessionID) (err error) {
-	fmt.Printf("\n[TO APP]:\n")
+	//fmt.Printf("\n[TO APP]:\n")
 	return
 }
 
 // FromApp implemented as part of Application interface. This is the callback for all Application level messages from the counter party.
 func (e *TradeClient) FromApp(msg *quickfix.Message, sessionID quickfix.SessionID) (reject quickfix.MessageRejectError) {
-	fmt.Printf("[FROM APP]\n\n")
+	//fmt.Printf("[FROM APP]\n\n")
 	return
 }
 
