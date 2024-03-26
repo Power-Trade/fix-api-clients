@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"sync"
 	"time"
 
 	"github.com/Power-Trade/fix-api-clients/pkg/pt"
@@ -20,7 +21,8 @@ type TradeClient struct {
 	SenderCompID string
 	PrivateKey   []byte
 	Settings     *quickfix.Settings
-	connected    chan bool
+	connected    bool
+	connectCond  *sync.Cond
 }
 
 type ApplicationWithWait interface {
@@ -43,7 +45,8 @@ func NewTradeClient(cfgFilename string, keyFilename string) (*TradeClient, error
 		SenderCompID: apiKey,
 		PrivateKey:   privateKey,
 		Settings:     settings,
-		connected:    make(chan bool, 1),
+		connected:    false,
+		connectCond:  sync.NewCond(&sync.Mutex{}),
 	}
 	return app, nil
 }
@@ -98,30 +101,34 @@ func StartConnection(app ApplicationWithWait, settings *quickfix.Settings) error
 }
 
 // OnCreate implemented as part of Application interface
-func (e TradeClient) OnCreate(sessionID quickfix.SessionID) {}
+func (e *TradeClient) OnCreate(sessionID quickfix.SessionID) {}
 
 // OnLogon implemented as part of Application interface
-func (e TradeClient) OnLogon(sessionID quickfix.SessionID) {}
+func (e *TradeClient) OnLogon(sessionID quickfix.SessionID) {}
 
 // OnLogout implemented as part of Application interface
-func (e TradeClient) OnLogout(sessionID quickfix.SessionID) {}
+func (e *TradeClient) OnLogout(sessionID quickfix.SessionID) {}
 
 // FromAdmin implemented as part of Application interface
-func (e TradeClient) FromAdmin(msg *quickfix.Message, sessionID quickfix.SessionID) (reject quickfix.MessageRejectError) {
+func (e *TradeClient) FromAdmin(msg *quickfix.Message, sessionID quickfix.SessionID) (reject quickfix.MessageRejectError) {
 	msgTypeStr, _ := msg.MsgType()
 	msgType := enum.MsgType(msgTypeStr)
 	if msgType == enum.MsgType_LOGON {
-		e.connected <- true
+		e.connectCond.L.Lock()
+		e.connected = true
+		e.connectCond.L.Unlock()
+		e.connectCond.Broadcast()
 	} else if msgType == enum.MsgType_LOGOUT {
-		e.connected <- false
-		close(e.connected)
+		e.connectCond.L.Lock()
+		e.connected = false
+		e.connectCond.L.Unlock()
+		e.connectCond.Broadcast()
 	}
-	fmt.Printf("[FROM ADMIN]\n\n")
 	return nil
 }
 
 // ToAdmin implemented as part of Application interface
-func (e TradeClient) ToAdmin(msg *quickfix.Message, sessionID quickfix.SessionID) {
+func (e *TradeClient) ToAdmin(msg *quickfix.Message, sessionID quickfix.SessionID) {
 	msgTypeStr, _ := msg.MsgType()
 	msgType := enum.MsgType(msgTypeStr)
 	if msgType == enum.MsgType_LOGON {
@@ -140,18 +147,22 @@ func (e TradeClient) ToAdmin(msg *quickfix.Message, sessionID quickfix.SessionID
 }
 
 // ToApp implemented as part of Application interface
-func (e TradeClient) ToApp(msg *quickfix.Message, sessionID quickfix.SessionID) (err error) {
+func (e *TradeClient) ToApp(msg *quickfix.Message, sessionID quickfix.SessionID) (err error) {
 	fmt.Printf("\n[TO APP]:\n")
 	return
 }
 
 // FromApp implemented as part of Application interface. This is the callback for all Application level messages from the counter party.
-func (e TradeClient) FromApp(msg *quickfix.Message, sessionID quickfix.SessionID) (reject quickfix.MessageRejectError) {
+func (e *TradeClient) FromApp(msg *quickfix.Message, sessionID quickfix.SessionID) (reject quickfix.MessageRejectError) {
 	fmt.Printf("[FROM APP]\n\n")
 	return
 }
 
-func (e TradeClient) WaitConnect() bool {
-	isConnected := <-e.connected
-	return isConnected
+func (e *TradeClient) WaitConnect() bool {
+	e.connectCond.L.Lock()
+	defer e.connectCond.L.Unlock()
+	for !e.connected {
+		e.connectCond.Wait()
+	}
+	return true
 }
