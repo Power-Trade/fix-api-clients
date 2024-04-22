@@ -3,6 +3,7 @@ package fix
 import (
 	"bytes"
 	"errors"
+	"flag"
 	"fmt"
 	"io"
 	"os"
@@ -14,6 +15,10 @@ import (
 	"github.com/quickfixgo/field"
 	"github.com/quickfixgo/quickfix"
 	"github.com/quickfixgo/quickfix/config"
+)
+
+var (
+	loggerCmd = flag.String("l", "file", "Log") // file/no
 )
 
 // TradeClient implements the quickfix.Application interface
@@ -79,9 +84,18 @@ SenderCompID=`+apiKey+`
 }
 
 func StartConnection(app ApplicationWithWait, settings *quickfix.Settings) error {
-	fileLogFactory := NewBeautyLogFactory(quickfix.NewScreenLogFactory())
+	var logFactory quickfix.LogFactory
 
-	initiator, err := quickfix.NewInitiator(app, quickfix.NewMemoryStoreFactory(), settings, fileLogFactory)
+	switch *loggerCmd {
+	case "file":
+		logFactory = NewBeautyLogFactory(quickfix.NewScreenLogFactory())
+	case "no":
+		logFactory = quickfix.NewNullLogFactory()
+	default:
+		panic(fmt.Sprintf("unknown log: %s", *loggerCmd))
+	}
+
+	initiator, err := quickfix.NewInitiator(app, quickfix.NewMemoryStoreFactory(), settings, logFactory)
 	if err != nil {
 		return fmt.Errorf("unable to create Initiator: %s", err)
 	}
