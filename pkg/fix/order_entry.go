@@ -55,6 +55,9 @@ func addOrder() *quickfix.Message {
 	order.Set(field.NewTimeInForce(enum.TimeInForce_GOOD_TILL_DATE))
 	order.Set(field.NewExpireTime(time.Now().AddDate(0, 0, 1)))
 
+	// Optional SecondaryClOrdID: up to 17 ASCII symbols
+	order.Set(field.NewSecondaryClOrdID(time.Now().Format("15:04:05.999999")))
+
 	return order.ToMessage()
 }
 
@@ -78,7 +81,6 @@ func addOrderMatch() *quickfix.Message {
 func cancelOrder() *quickfix.Message {
 	if lastMessageClOrdId == "" {
 		lastMessageClOrdId = "11" // Non-existing order_token
-		// ToDo: FIX standard requires immediate response, but now it is just ignored
 	}
 
 	cancel := ordercancelrequest.New(
