@@ -11,6 +11,7 @@ import (
 	"github.com/Power-Trade/fix-api-clients/pkg/pt"
 	"github.com/quickfixgo/enum"
 	"github.com/quickfixgo/field"
+	"github.com/quickfixgo/fix44/heartbeat"
 	"github.com/quickfixgo/fix44/newordermultileg"
 	"github.com/quickfixgo/fix44/newordersingle"
 	"github.com/quickfixgo/fix44/ordercancelrequest"
@@ -31,6 +32,7 @@ var (
 		cancelOrder, // Cancel unknown order
 		addOrderMultiLeg,
 		addOrderExecInst,
+		sendHB,
 	}
 
 	actionsCmd = flag.String("c", "", "Action list") // addOrder,cancelOrder,addOrderTrigger
@@ -148,6 +150,11 @@ func addOrderExecInst() *quickfix.Message {
 	order.Set(field.NewExecInst(enum.ExecInst_PARTICIPANT_DONT_INITIATE))
 
 	return order.ToMessage()
+}
+
+func sendHB() *quickfix.Message {
+	hrtbt := heartbeat.New()
+	return hrtbt.ToMessage()
 }
 
 func getActions(possibleActions []FIXExampleAction) []FIXExampleAction {
