@@ -3,11 +3,11 @@ module github.com/Power-Trade/fix-api-clients
 go 1.22
 
 require (
-	github.com/golang-jwt/jwt/v4 v4.5.0
+	github.com/golang-jwt/jwt/v5 v5.2.1
 	github.com/quickfixgo/enum v0.1.0
 	github.com/quickfixgo/field v0.1.0
 	github.com/quickfixgo/fix44 v0.1.0
-	github.com/quickfixgo/quickfix v0.9.4
+	github.com/quickfixgo/quickfix v0.9.6
 	github.com/quickfixgo/tag v0.1.0
 	github.com/shopspring/decimal v1.4.0
 )
