@@ -227,10 +227,10 @@ func RunOrderEntryManual(cfgFileName string, apiKeyName string) error {
 	targetCompID, _ := app.Settings.GlobalSettings().Setting(config.TargetCompID)
 
 	for {
-		time.Sleep(time.Second)
+		time.Sleep(100 * time.Millisecond)
 
-		//clOrdId := fmt.Sprint(pt.DefaultTokenGenerator.Next())
-		clOrdId := "123321"
+		clOrdId := fmt.Sprint(pt.DefaultTokenGenerator.Next())
+		//clOrdId := "123321"
 
 		lastMessageClOrdId = clOrdId // Store for cancel
 
@@ -242,9 +242,9 @@ func RunOrderEntryManual(cfgFileName string, apiKeyName string) error {
 		)
 		//order.Set(field.NewSendingTime(time.Now()))
 		order.Set(field.NewSymbol("BTC-USD-PERPETUAL"))
-		order.Set(field.NewOrderQty(decimal.NewFromFloat(0.01), 2))
+		order.Set(field.NewOrderQty(decimal.NewFromFloat(0.0001), 4))
 
-		order.Set(field.NewPrice(decimal.NewFromFloat(1), 0))
+		order.Set(field.NewPrice(decimal.NewFromFloat(69000), 0))
 
 		order.Set(field.NewTimeInForce(enum.TimeInForce_GOOD_TILL_CANCEL))
 		//order.Set(field.NewExpireTimeWithPrecision(time.Now().AddDate(0, 0, 1), quickfix.Nanos))
